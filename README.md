@@ -1,9 +1,10 @@
-Directions:
 
-Install docker or boot2docker.
+### Setup instructions ###
+1. Install docker or boot2docker.
+2. ``` 
 git clone https://github.com/tbenthompson/3bem_docker.git
 cd 3bem_docker
-./build
+./build ```
 
 Various useful sources:
 
