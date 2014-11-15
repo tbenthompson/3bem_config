@@ -30,22 +30,13 @@ RUN apt-get update && apt-get install -y \
     subversion\
     wget
 
-# Setup ssh keys to allow cloning a private github repo.
-RUN mkdir -p /root/.ssh
-ADD repo-key /root/.ssh/id_rsa
-RUN chmod 700 /root/.ssh/id_rsa
-RUN echo "Host github.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
-
-# Clone the repository.
-RUN git clone git@github.com:tbenthompson/active.git /home/active
+# Setup the repository directory
+RUN mkdir -p /home/3bem
 
 # Install OpenCL
 RUN mkdir /opencl
-WORKDIR /opencl
-RUN wget http://registrationcenter.intel.com/irc_nas/4181/opencl_runtime_14.2_x64_4.5.0.8.tgz 
-RUN tar -xvf opencl_runtime_14.2_x64_4.5.0.8.tgz 
-WORKDIR pset_opencl_runtime_14.1_x64_4.5.0.8
-WORKDIR rpm
+ADD opencl.tgz /opencl/runtime
+WORKDIR /opencl/runtime/pset_opencl_runtime_14.1_x64_4.5.0.8/rpm
 RUN alien *.rpm
 RUN dpkg -i *.deb
 RUN mkdir -p /etc/OpenCL/vendors
@@ -56,15 +47,15 @@ RUN ln -s /opt/intel/opencl-1.2-4.5.0.8/etc/intel64.icd /etc/OpenCL/vendors/
 RUN pip install fabricate
 
 # Download the libraries
-WORKDIR /home/active
+WORKDIR /home/3bem
 RUN mkdir lib
 WORKDIR lib
 
 # Autocheck
-RUN git clone git@github.com:tbenthompson/autocheck.git
+RUN git clone https://github.com/tbenthompson/autocheck.git
 
 # C++ Actor-framework
-WORKDIR /home/active/lib
+WORKDIR /home/3bem/lib
 RUN git clone https://github.com/actor-framework/actor-framework.git
 WORKDIR actor-framework
 # # Grab the OpenCL CAF submodule
@@ -75,14 +66,9 @@ RUN ./configure --no-cash
 RUN make -j12
 
 # UnitTest++
-WORKDIR /home/active/lib
+WORKDIR /home/3bem/lib
 RUN svn checkout http://svn.code.sf.net/p/unittest-cpp/code/UnitTest++ unittest-cpp
 WORKDIR unittest-cpp
 RUN make all
 
-# Build the code
-WORKDIR /home/active
-ENV PETSC_DIR /etc/alternatives/petsc
-ENV PETSC_ARCH linux-gnu-c-opt
-RUN python build.py
-RUN ./all_tests
+RUN echo "cd /home/3bem/3bem; export PETSC_DIR=/etc/alternatives/petsc; export PETSC_ARCH=linux-gnu-c-opt" >> ~/.bashrc

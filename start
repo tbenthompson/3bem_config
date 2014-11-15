@@ -1,0 +1,1 @@
+sudo docker run --privileged=true -i -t -v $(pwd):/home/3bem/3bem 3bem-dev /bin/bash
