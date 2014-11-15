@@ -27,6 +27,7 @@ RUN apt-get update && apt-get install -y \
     python-distribute\
     python-pip\
     python-h5py\
+    strace\
     subversion\
     wget
 
@@ -42,9 +43,6 @@ RUN dpkg -i *.deb
 RUN mkdir -p /etc/OpenCL/vendors
 RUN ln -s /opt/intel/opencl-1.2-4.5.0.8/lib64/libOpenCL.so /usr/lib
 RUN ln -s /opt/intel/opencl-1.2-4.5.0.8/etc/intel64.icd /etc/OpenCL/vendors/
-
-# Install the build tool -- fabricate.py
-RUN pip install fabricate
 
 # Download the libraries
 WORKDIR /home/3bem
@@ -71,4 +69,8 @@ RUN svn checkout http://svn.code.sf.net/p/unittest-cpp/code/UnitTest++ unittest-
 WORKDIR unittest-cpp
 RUN make all
 
+# Add environment variables and initial directory to bashrc
 RUN echo "cd /home/3bem/3bem; export PETSC_DIR=/etc/alternatives/petsc; export PETSC_ARCH=linux-gnu-c-opt" >> ~/.bashrc
+
+# Make the terminal prettier.
+RUN echo 'export PS1="[\u@docker] \W # "' >> ~/.bashrc

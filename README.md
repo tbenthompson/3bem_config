@@ -13,6 +13,7 @@ Various useful sources:
 * http://viget.com/extend/how-to-use-docker-on-os-x-the-missing-guide
 * http://tersesystems.com/2013/11/20/building-a-development-environment-with-docker/
 * https://docs.docker.com/installation/mac/
+* http://stackoverflow.com/questions/25185405/using-gpu-from-a-docker-container
 
 TODO: 
 
