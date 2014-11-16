@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y \
     freeglut3-dev\
     gdb\
     git\
+    h5utils\
     libglew1.5\
     libglew1.5-dev\
     libglu1-mesa\
@@ -72,6 +73,12 @@ WORKDIR /home/3bem/lib
 RUN svn checkout http://svn.code.sf.net/p/unittest-cpp/code/UnitTest++ unittest-cpp
 WORKDIR unittest-cpp
 RUN make all
+
+#Okada wrapper
+WORKDIR /home/3bem/
+RUN git clone https://github.com/tbenthompson/okada_wrapper.git
+WORKDIR okada_wrapper
+RUN python setup.py install
 
 # Add environment variables and initial directory to bashrc
 RUN echo "cd /home/3bem/3bem; export PETSC_DIR=/etc/alternatives/petsc; export PETSC_ARCH=linux-gnu-c-opt" >> ~/.bashrc
