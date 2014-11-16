@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
     cmake\
     freeglut3\ 
     freeglut3-dev\
+    gdb\
     git\
     libglew1.5\
     libglew1.5-dev\
