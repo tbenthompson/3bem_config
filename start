@@ -1,1 +1,15 @@
-sudo docker run --privileged=true -i -t -v $(pwd):/home/3bem/3bem 3bem-dev /bin/bash
+# This rather complex command creates a new user with the permissions of 
+# the current host inside the docker image and then start a bash shell on
+# the image. 
+# This allows the creation of files within the docker container to have
+# the same group and owner as the user who started the docker container.
+# created by Ben Thompson
+CURGROUP=$(id -g $USER)
+CURUSERID=$(id -u $USER)
+sudo docker run --privileged=true -i -t -v $(pwd):/home/3bem/3bem 3bem-dev sh -c "\
+addgroup --gid=$CURGROUP active_group && \
+adduser --disabled-password --gecos '' --ingroup=active_group --uid=$CURUSERID active_user && \
+adduser active_user sudo && \
+echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
+cp ~/.bashrc /home/active_user && \
+su active_user;"

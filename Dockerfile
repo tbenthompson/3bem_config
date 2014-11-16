@@ -25,8 +25,11 @@ RUN apt-get update && apt-get install -y \
     petsc-dev\
     python-dev\ 
     python-distribute\
-    python-pip\
     python-h5py\
+    python-matplotlib\
+    python-numpy\
+    python-scipy\
+    python-pip\
     strace\
     subversion\
     wget

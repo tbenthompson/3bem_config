@@ -7,15 +7,15 @@
 5. Start the docker container: `cd 3bem; ../3bem_docker/start`
 
 Various useful sources:
-
 * http://stackoverflow.com/questions/15693153/mounting-directory-from-parent-system-to-container-in-docker
 * http://stackoverflow.com/questions/21498832/in-docker-whats-the-difference-between-a-container-and-an-image
 * http://viget.com/extend/how-to-use-docker-on-os-x-the-missing-guide
 * http://tersesystems.com/2013/11/20/building-a-development-environment-with-docker/
 * https://docs.docker.com/installation/mac/
 * http://stackoverflow.com/questions/25185405/using-gpu-from-a-docker-container
+* http://stackoverflow.com/questions/23544282/what-is-the-best-way-to-manage-permissions-for-docker-shared-volumes
 
 TODO: 
-
 * I need to get a hold of a mac to figure out the proper instructions for using boot2docker.
 * Use my virtual-machined Windows XP to figure out basic Windows instructions.
+* Figure out how to set up OpenCL and allow docker access to a GPU
