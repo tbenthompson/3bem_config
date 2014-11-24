@@ -17,6 +17,6 @@ Various useful sources:
 * OpenGL and Nvidia graphics: https://github.com/thewtex/docker-opengl-nvidia
 
 TODO: 
-* I need to get a hold of a mac to figure out the proper instructions for using boot2docker.
+* Figure out the proper instructions for using boot2docker on a mac.
 * Use my virtual-machined Windows XP to figure out basic Windows instructions.
-* Figure out how to set up OpenCL and allow docker access to a GPU
+* Figure out how to set up OpenCL and allow docker access to a GPU (more generally, docker + graphics/UI)
