@@ -14,6 +14,7 @@ Various useful sources:
 * https://docs.docker.com/installation/mac/
 * http://stackoverflow.com/questions/25185405/using-gpu-from-a-docker-container
 * http://stackoverflow.com/questions/23544282/what-is-the-best-way-to-manage-permissions-for-docker-shared-volumes
+* OpenGL and Nvidia graphics: https://github.com/thewtex/docker-opengl-nvidia
 
 TODO: 
 * I need to get a hold of a mac to figure out the proper instructions for using boot2docker.

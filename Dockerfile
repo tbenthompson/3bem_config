@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y \
     gdb\
     git\
     h5utils\
+    libcanberra-gtk-module\
     libglew1.5\
     libglew1.5-dev\
     libglu1-mesa\
@@ -23,6 +24,7 @@ RUN apt-get update && apt-get install -y \
     libgl1-mesa-dev\
     libhdf5-mpi-dev\
     libnuma1\
+    mayavi2\
     opencl-headers\
     petsc-dev\
     python-dev\ 
