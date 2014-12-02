@@ -86,4 +86,4 @@ RUN python setup.py install
 RUN echo "cd /home/3bem/3bem; export PETSC_DIR=/etc/alternatives/petsc; export PETSC_ARCH=linux-gnu-c-opt" >> ~/.bashrc
 
 # Make the terminal prettier.
-RUN echo 'export PS1="[\u@docker] \W # "' >> ~/.bashrc
+RUN echo 'export PS1="\[$(tput bold)\]\[$(tput setaf 4)\][\[$(tput setaf 5)\]\u\[$(tput setaf 4)\]@\[$(tput setaf 5)\]docker \[$(tput setaf 2)\]\W\[$(tput setaf 4)\]]\\$ \[$(tput sgr0)\]" # "' >> ~/.bashrc
