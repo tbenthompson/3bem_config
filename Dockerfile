@@ -25,7 +25,6 @@ RUN apt-get update && apt-get install -y \
     libhdf5-mpi-dev\
     libnuma1\
     mayavi2\
-    opencl-headers\
     petsc-dev\
     python-dev\ 
     python-distribute\
@@ -41,16 +40,6 @@ RUN apt-get update && apt-get install -y \
 # Setup the repository directory
 RUN mkdir -p /home/3bem
 
-# Install OpenCL
-RUN mkdir /opencl
-ADD opencl.tgz /opencl/runtime
-WORKDIR /opencl/runtime/pset_opencl_runtime_14.1_x64_4.5.0.8/rpm
-RUN alien *.rpm
-RUN dpkg -i *.deb
-RUN mkdir -p /etc/OpenCL/vendors
-RUN ln -s /opt/intel/opencl-1.2-4.5.0.8/lib64/libOpenCL.so /usr/lib
-RUN ln -s /opt/intel/opencl-1.2-4.5.0.8/etc/intel64.icd /etc/OpenCL/vendors/
-
 # Download the libraries
 WORKDIR /home/3bem
 RUN mkdir lib
@@ -58,17 +47,6 @@ WORKDIR lib
 
 # Autocheck
 RUN git clone https://github.com/tbenthompson/autocheck.git
-
-# C++ Actor-framework
-WORKDIR /home/3bem/lib
-RUN git clone https://github.com/actor-framework/actor-framework.git
-WORKDIR actor-framework
-# # Grab the OpenCL CAF submodule
-RUN git submodule init
-RUN git submodule update
-# # Actually build
-RUN ./configure --no-cash
-RUN make -j12
 
 # UnitTest++
 WORKDIR /home/3bem/lib
