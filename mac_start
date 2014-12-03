@@ -5,7 +5,13 @@
 # the same group and owner as the user who started the docker container.
 # The command also enables X11 forwarding from the host to the docker 
 # container.
+# This version is for Mac OS X and handles the details of boot2docker
 # created by Ben Thompson
+echo "Loading boot2docker VM."
+boot2docker init &> /dev/null
+boot2docker up &> /dev/null
+$(boot2docker shellinit)
+
 CURGROUP=$(boot2docker ssh "id -g \$USER")
 CURUSERID=$(boot2docker ssh "id -u \$USER")
 docker run --privileged=true -i -t -e DISPLAY=$DISPLAY -v $(pwd):/home/3bem/3bem -v /tmp/.X11-unix:/tmp/.X11-unix 3bem-dev sh -c "\
