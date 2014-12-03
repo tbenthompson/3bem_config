@@ -1,5 +1,2 @@
 #!/bin/bash
-if ! [ -f opencl.tgz ]; then
-	curl -o opencl.tgz http://registrationcenter.intel.com/irc_nas/4181/opencl_runtime_14.2_x64_4.5.0.8.tgz 
-fi
 docker build -t 3bem-dev .
