@@ -5,19 +5,16 @@
 2. Download 3bem: `git clone https://github.com/tbenthompson/3bem.git`
 3. Grab the 3bem_docker submodule: `cd 3bem; git submodule init; git submodule update;`
 4. Build the docker images: `cd 3bem_docker; ./build`
-5. Start a docker container `cd ../; ./3bem_docker/start` The 3bem_docker/start script should open a docker container with the current folder shared. So, by starting the 
-6. Play! (Try: `python build.py; ./all_tests;`)
+5. Start a docker container `cd ../; ./3bem_docker/start` The 3bem_docker/start script should open a docker container with the current folder shared. 
+6. Try `python build.py; ./all_tests;` to run the tests.
+7. Check out some real use-cases in `./inttest`
 
 ### Mac OS X###
 Installing on Mac is slightly more involved because Docker does not run natively on anything other than Linux. So, the tool boot2docker adds a very lightweight Linux virtual machine between your OS and the Docker application.
 
 1. Install virtualbox. Go to the [virtual box website](http://virtualbox.org/).
 2. Install boot2docker. Go to the [Docker website](https://docs.docker.com/installation/mac/) and follow the directions there.
-3. Download 3bem: `git clone https://github.com/tbenthompson/3bem.git`
-4. Grab the 3bem_docker submodule: `cd 3bem; git submodule init; git submodule update;`
-5. Build the docker images: `cd 3bem_docker; ./build`
-6. Start a docker container `cd ../; ./3bem_docker/start` The 3bem_docker/start script should open a docker container with the current folder shared. So, by starting the 
-7. Play! (Try: `python build.py; ./all_tests;`)
+3. Follow step 2 onwards from the Ubuntu section.
 
 ## Notes ##
 
