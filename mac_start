@@ -12,12 +12,27 @@ boot2docker init &> /dev/null
 boot2docker up &> /dev/null
 $(boot2docker shellinit)
 
-CURGROUP=$(boot2docker ssh "id -g \$USER")
-CURUSERID=$(boot2docker ssh "id -u \$USER")
-docker run --privileged=true -i -t -e DISPLAY=$DISPLAY -v $(pwd):/home/3bem/3bem -v /tmp/.X11-unix:/tmp/.X11-unix 3bem-dev sh -c "\
-getent group $CURGROUP || addgroup --gid=$CURGROUP active_group && \
-adduser --disabled-password --gecos '' --ingroup=\$(getent group $CURGROUP | cut -d: -f1) --uid=$CURUSERID active_user && \
-adduser active_user sudo && \
-echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
-cp ~/.bashrc /home/active_user && \
-su active_user;"
+if [[ -n $(docker ps|grep 3bem-dev|cut -f1 -d" ") ]]; then
+    echo "Container already running."
+else
+    echo "Starting container."
+    CURGROUP=$(boot2docker ssh "id -g \$USER")
+    CURUSERID=$(boot2docker ssh "id -u \$USER")
+    docker run --privileged=true -d -v $(pwd):/home/3bem/3bem -P 3bem-dev sh -c "\
+    getent group $CURGROUP || addgroup --gid=$CURGROUP active_group && \
+    adduser --disabled-password --gecos '' --ingroup=\$(getent group $CURGROUP | cut -d: -f1) --uid=$CURUSERID active_user && \
+    echo active_user:password | chpasswd && \
+    adduser active_user sudo && \
+    echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
+    cp ~/.bashrc /home/active_user && \
+    mkdir /home/active_user/.ssh && \
+    cat /id_rsa.pub >> /home/active_user/.ssh/authorized_keys && \
+    /usr/sbin/sshd -D"
+fi
+
+
+echo "Connecting to docker container."
+CONTAINER_ID=$(docker ps|grep 3bem-dev|cut -f1 -d" "| sed -n 1p)
+PORT=$(docker port $CONTAINER_ID 22 | cut -d: -f2)
+DIR="$( cd "$( dirname "$0" )" && pwd )"
+ssh -X -oStrictHostKeyChecking=no -i $DIR/id_rsa  -p $PORT active_user@$(boot2docker ip 2> /dev/null)

@@ -65,3 +65,9 @@ RUN echo "cd /home/3bem/3bem; export PETSC_DIR=/etc/alternatives/petsc; export P
 
 # Make the terminal prettier.
 RUN echo 'export PS1="\[$(tput bold)\]\[$(tput setaf 4)\][\[$(tput setaf 5)\]\u\[$(tput setaf 4)\]@\[$(tput setaf 5)\]docker \[$(tput setaf 2)\]\W\[$(tput setaf 4)\]]\\$ \[$(tput sgr0)\]" # "' >> ~/.bashrc
+
+# Expose port 22 and setup sshd
+RUN apt-get install -y openssh-server
+RUN mkdir /var/run/sshd
+EXPOSE 22
+ADD id_rsa.pub /id_rsa.pub
