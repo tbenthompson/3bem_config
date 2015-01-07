@@ -1,5 +1,9 @@
 #!/bin/bash
-if ! [ -f id_rsa.pub ]; then
-    ssh-keygen -b 1024 -t rsa -f id_rsa -P ""
+# Distinguish between linux and mac to determine which build script to run.
+DIR="$( cd "$( dirname "$0" )" && pwd )"
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    $DIR/linux_build;
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    $DIR/mac_build;
 fi
-docker build -t 3bem-dev .
+

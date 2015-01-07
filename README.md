@@ -3,7 +3,7 @@
 ### Ubuntu ###
 1. Install docker: `sudo apt-get install docker.io`
 2. Download 3bem: `git clone https://github.com/tbenthompson/3bem.git`
-3. Grab the 3bem_docker submodule: `cd 3bem; git submodule init; git submodule update;`
+3. Grab the 3bem_docker submodule: `cd 3bem; git clone https://github.com/tbenthompson/3bem_docker.git`
 4. Build the docker images: `cd 3bem_docker; ./build`
 5. Start a docker container `cd ../; ./3bem_docker/start` The 3bem_docker/start script should open a docker container with the current folder shared. 
 6. Try `python build.py; ./all_tests;` to run the tests.
