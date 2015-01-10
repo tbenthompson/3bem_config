@@ -1,2 +1,6 @@
 #!/bin/bash
-./shared_build
+SUDO=''
+if (( $EUID != 0 )); then
+    SUDO='sudo'
+fi
+$SUDO ./shared_build
