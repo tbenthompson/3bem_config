@@ -1,5 +1,2 @@
 #!/bin/bash
-if ! [ -f id_rsa.pub ]; then
-    ssh-keygen -b 1024 -t rsa -f id_rsa -P ""
-fi
-sudo docker build -t 3bem-dev .
+./shared_build

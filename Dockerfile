@@ -81,5 +81,12 @@ RUN mkdir /var/run/sshd
 EXPOSE 22
 ADD id_rsa.pub /id_rsa.pub
 
-# Add openssh-server and lcov to the apt-get list
-# Figure out how to properly get 3bem_stable in here.
+# Setup SSH keys so that docker can log in to private github repos.
+RUN mkdir -p /root/.ssh
+ADD id_rsa /root/.ssh/id_rsa
+RUN chmod 700 /root/.ssh/id_rsa
+RUN echo "Host github.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
+
+# Get 3bem_stable
+WORKDIR /home/3bem
+RUN git clone git@github.com:tbenthompson/3bem.git 3bem_stable
