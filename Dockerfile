@@ -89,4 +89,4 @@ RUN echo "Host github.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 
 # Get 3bem_stable
 WORKDIR /home/3bem
-RUN git clone git@github.com:tbenthompson/3bem.git 3bem_stable
+RUN git clone git@github.com:tbenthompson/3bem.git --branch stable 3bem_stable
