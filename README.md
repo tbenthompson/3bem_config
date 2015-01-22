@@ -2,12 +2,10 @@
 ## Setup instructions ##
 ### Ubuntu ###
 1. Install docker: `sudo apt-get install docker.io`
-2. Download the 3bem_docker repo: `git clone https://github.com/tbenthompson/3bem_docker.git`
-3. Generate a key pair: `cd 3bem_docker;./gen_keys` and add the public key "id_rsa.pub" as a permissible key on github. See [this page](https://help.github.com/articles/generating-ssh-keys/) for details. This step would not be necessary for a public code repository.
-4. Build the docker images: `./build`
-5. Start a docker container `cd ../; ./3bem_docker/start` The 3bem_docker/start script should open a docker container with the current folder shared. 
-6. Try `cd ../3bem_stable; python build.py run_tests` to run the tests.
-7. Check out some real use-cases: `ls ./inttest` or use the elastic processing tool.
+2. Download the bootstrap script and install the libraries and tools: `wget https://github.com/tbenthompson/3bem_config/raw/master/bootstrap.sh ; chmod +x ./bootstrap.sh; ./bootstrap.sh;`
+3. Start a docker container `./config/start` The config/start script should open a docker container with the current folder shared. 
+4. Try `cd 3bem_stable; python build.py fast_tests` to run the tests.
+5. Check out some real use-cases: `ls ./inttest` or use the "elastic" processing tool.
 
 ### Mac OS X###
 Installing on Mac is slightly more involved because Docker does not run natively on anything other than Linux. So, the tool boot2docker adds a very lightweight Linux virtual machine between your OS and the Docker application.
