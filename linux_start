@@ -8,14 +8,19 @@
 # created by Ben Thompson
 CURGROUP=$(id -g $USER)
 CURUSERID=$(id -u $USER)
-sudo docker run --privileged=true -i -t -e DISPLAY=$DISPLAY -v $(pwd):/home/3bem/3bem -v /tmp/.X11-unix:/tmp/.X11-unix 3bem-dev bash -c "\
+sudo docker run --privileged=true -i -t -e DISPLAY=$DISPLAY \
+-v $(pwd)/3bem_env:/home/3bem/3bem_env \
+-v $(pwd)/3bem_dev:/home/3bem/3bem_dev \
+-v $(pwd)/3bem_stable:/home/3bem/3bem_stable \
+-v $(pwd)/elastic:/home/3bem/elastic \
+-v /tmp/.X11-unix:/tmp/.X11-unix 3bem-dev bash -c "\
 getent group $CURGROUP || addgroup --gid=$CURGROUP active_group && \
 adduser --disabled-password --gecos '' --ingroup=\$(getent group $CURGROUP | cut -d: -f1) --uid=$CURUSERID active_user && \
 adduser active_user sudo && \
 echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
 cp ~/.bashrc /home/active_user && \
-if [[ "$#" -eq 1 ]]; then \
-    su active_user -c $1;
+if [[ '$#' -eq 1 ]]; then \
+    su active_user -c '$1';
 else \
     su active_user;
 fi
