@@ -1,5 +1,5 @@
 # This rather complex command creates a new user with the permissions of 
-# the current host inside the docker image and then start a bash shell on
+# the current host inside the docker image and then starts a bash shell on
 # the image. 
 # This allows the creation of files within the docker container to have
 # the same group and owner as the user who started the docker container.

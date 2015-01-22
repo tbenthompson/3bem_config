@@ -2,8 +2,8 @@
 # Distinguish between linux and mac to determine which start script to run.
 DIR="$( cd "$( dirname "$0" )" && pwd )"
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    $DIR/linux_start;
+    $DIR/linux_start "$@";
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    $DIR/mac_start;
+    $DIR/mac_start "$@";
 fi
 

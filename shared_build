@@ -1,8 +1,3 @@
 #!/bin/bash
-docker build -t 3bem-dev-almost .
-docker run --privileged=true 3bem-dev-almost /bin/bash -c "
-    cd /home/3bem/3bem_stable;
-    git pull origin stable;
-    PETSC_DIR=/etc/alternatives/petsc PETSC_ARCH=linux-gnu-c-opt python build.py;" 
-CONTAINER_ID=`sudo docker ps -l -q`
-docker commit -m "Ready to go!" $CONTAINER_ID 3bem-dev
+./gen_keys
+docker build -t 3bem-dev .

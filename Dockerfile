@@ -19,6 +19,8 @@ RUN apt-get update && apt-get install -y \
     git\
     h5utils\
     lcov\
+    libarmadillo-dev\
+    libarmadillo4\
     libcanberra-gtk-module\
     libglew1.5\
     libglew1.5-dev\
@@ -38,6 +40,7 @@ RUN apt-get update && apt-get install -y \
     python-numpy\
     python-scipy\
     python-pip\
+    python-pytest\
     strace\
     subversion\
     wget
@@ -71,7 +74,7 @@ WORKDIR okada_wrapper
 RUN python setup.py install
 
 # Add environment variables and initial directory to bashrc
-RUN echo "cd /home/3bem/3bem; export PETSC_DIR=/etc/alternatives/petsc; export PETSC_ARCH=linux-gnu-c-opt" >> ~/.bashrc
+RUN echo "cd /home/3bem; export PETSC_DIR=/etc/alternatives/petsc; export PETSC_ARCH=linux-gnu-c-opt" >> ~/.bashrc
 
 # Make the terminal prettier.
 RUN echo 'export PS1="\[$(tput bold)\]\[$(tput setaf 4)\][\[$(tput setaf 5)\]\u\[$(tput setaf 4)\]@\[$(tput setaf 5)\]docker \[$(tput setaf 2)\]\W\[$(tput setaf 4)\]]\\$ \[$(tput sgr0)\]" # "' >> ~/.bashrc
@@ -80,13 +83,3 @@ RUN echo 'export PS1="\[$(tput bold)\]\[$(tput setaf 4)\][\[$(tput setaf 5)\]\u\
 RUN mkdir /var/run/sshd
 EXPOSE 22
 ADD id_rsa.pub /id_rsa.pub
-
-# Setup SSH keys so that docker can log in to private github repos.
-RUN mkdir -p /root/.ssh
-ADD id_rsa /root/.ssh/id_rsa
-RUN chmod 700 /root/.ssh/id_rsa
-RUN echo "Host github.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
-
-# Get 3bem_stable
-WORKDIR /home/3bem
-RUN git clone git@github.com:tbenthompson/3bem.git --branch stable 3bem_stable
