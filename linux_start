@@ -9,9 +9,9 @@
 CURGROUP=$(id -g $USER)
 CURUSERID=$(id -u $USER)
 sudo docker run --privileged=true -i -t -e DISPLAY=$DISPLAY \
--v $(pwd)/3bem_env:/home/3bem/3bem_env \
--v $(pwd)/3bem_dev:/home/3bem/3bem_dev \
--v $(pwd)/3bem_stable:/home/3bem/3bem_stable \
+-v $(pwd)/config:/home/3bem/config \
+-v $(pwd)/devlib:/home/3bem/devlib \
+-v $(pwd)/stablelib:/home/3bem/stablelib \
 -v $(pwd)/elastic:/home/3bem/elastic \
 -v /tmp/.X11-unix:/tmp/.X11-unix 3bem-dev bash -c "\
 getent group $CURGROUP || addgroup --gid=$CURGROUP active_group && \
