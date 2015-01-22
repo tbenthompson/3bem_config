@@ -22,4 +22,4 @@ git clone -b stable --single-branch \
     ${GITPROTOCOL}tbenthompson/3bem.git stablelib
 git clone ${GITPROTOCOL}tbenthompson/elastic.git
 
-./3bem_env/start "cd /home/3bem/stablelib; PETSC_DIR=$PETSC_DIR PETSC_ARCH=$PETSC_ARCH python build.py; cd /home/3bem/elastic; PETSC_DIR=$PETSC_DIR PETSC_ARCH=$PETSC_ARCH python build.py;"
+./config/start "cd /home/3bem/stablelib; PETSC_DIR=$PETSC_DIR PETSC_ARCH=$PETSC_ARCH python build.py; cd /home/3bem/elastic; PETSC_DIR=$PETSC_DIR PETSC_ARCH=$PETSC_ARCH python build.py;"
