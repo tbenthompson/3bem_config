@@ -20,7 +20,7 @@ adduser active_user sudo && \
 echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
 cp ~/.bashrc /home/active_user && \
 if [[ '$#' -eq 1 ]]; then \
-    su active_user -c '$1';
+    su active_user -s /bin/bash -c '$1';
 else \
     su active_user;
 fi
