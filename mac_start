@@ -18,7 +18,12 @@ else
     echo "Starting container."
     CURGROUP=$(boot2docker ssh "id -g \$USER")
     CURUSERID=$(boot2docker ssh "id -u \$USER")
-    docker run --privileged=true -d -v $(pwd):/home/3bem/3bem -P 3bem-dev sh -c "\
+    docker run --privileged=true -d \
+        -v $(pwd)/config:/home/3bem/config \
+        -v $(pwd)/devlib:/home/3bem/devlib \
+        -v $(pwd)/stablelib:/home/3bem/stablelib \
+        -v $(pwd)/elastic:/home/3bem/elastic \
+        -P 3bem-dev sh -c "\
     getent group $CURGROUP || addgroup --gid=$CURGROUP active_group && \
     adduser --disabled-password --gecos '' --ingroup=\$(getent group $CURGROUP | cut -d: -f1) --uid=$CURUSERID active_user && \
     echo active_user:password | chpasswd && \
@@ -35,4 +40,4 @@ echo "Connecting to docker container."
 CONTAINER_ID=$(docker ps|grep 3bem-dev|cut -f1 -d" "| sed -n 1p)
 PORT=$(docker port $CONTAINER_ID 22 | cut -d: -f2)
 DIR="$( cd "$( dirname "$0" )" && pwd )"
-ssh -X -oStrictHostKeyChecking=no -i $DIR/id_rsa  -p $PORT active_user@$(boot2docker ip 2> /dev/null)
+ssh -Y -oStrictHostKeyChecking=no -i $DIR/id_rsa  -p $PORT active_user@$(boot2docker ip 2> /dev/null)
