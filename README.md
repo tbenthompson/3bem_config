@@ -1,19 +1,23 @@
 
 ## Setup instructions ##
 ### Ubuntu ###
-1. Install docker: `sudo apt-get install docker.io`
-2. Download the bootstrap script and install the libraries and tools: `wget https://github.com/tbenthompson/3bem_config/raw/master/bootstrap.sh ; chmod +x ./bootstrap.sh; ./bootstrap.sh;`
-3. Start a docker container `./config/start` The config/start script should open a docker container with the current folder shared. 
-4. Try `cd 3bem_stable; python build.py fast_tests` to run the tests.
-5. Check out some real use-cases: `ls ./inttest` or use the "elastic" processing tool.
+0. Make sure git is installed.
+1. Make a directory for the installation: `mkdir 3bem; cd 3bem;`
+2. Download the bootstrap script, which installs the libraries and tools: `curl -L https://github.com/tbenthompson/3bem_config/raw/master/bootstrap.sh -o bootstrap.sh; chmod +x ./bootstrap.sh; ./bootstrap.sh;`
 
 ### Mac OS X###
 Installing on Mac is slightly more involved because Docker does not run natively on anything other than Linux. So, the tool boot2docker adds a very lightweight Linux virtual machine between your OS and the Docker application.
 
+0. Make sure git is installed.
 1. Install virtualbox. Go to the [virtual box website](http://virtualbox.org/).
 2. Install boot2docker. Go to the [Docker website](https://docs.docker.com/installation/mac/) and follow the directions there.
 3. If you want to be able to use GUI tools (matplotlib, etc) within the docker container, install XQuartz.
-4. Follow step 2 onwards from the Ubuntu section.
+4. Follow steps 1 and 2 from the Ubuntu section.
+
+## Usage ##
+1. Start a docker container `./config/start` The config/start script should open a docker container with the current folder included in the container. 
+2. Try `cd stablelib; python build.py fast_tests` to run the tests.
+3. Check out some real use-cases: `ls ./inttest` or use the "elastic" processing tool.
 
 ## Notes ##
 
