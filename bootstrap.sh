@@ -2,11 +2,26 @@
 # GITPROTOCOL="https://github.com/"
 GITPROTOCOL=git@github.com:
 
-# Install Docker
-curl -sSL https://get.docker.com/ubuntu/ | sudo sh
+#Make sure docker is installed
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    # Install Docker on linux
+    curl -sSL https://get.docker.com/ubuntu/ | sudo sh
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    # On Mac, check if boot2docker is installed.
+    command -v boot2docker >/dev/null 2>&1 || 
+        { echo "Install boot2docker before continuing." >&2; exit 1; }
+fi
 
 # Make sure git is installed
-sudo apt-get install git
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    # Install git on linux
+    sudo apt-get install git
+    curl -sSL https://get.docker.com/ubuntu/ | sudo sh
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    # On Mac, check if git is installed.
+    command -v git >/dev/null 2>&1 || 
+        { echo "Install git before continuing." >&2; exit 1; }
+fi
 
 # Download the environment configuration
 git clone ${GITPROTOCOL}tbenthompson/3bem_config.git config
