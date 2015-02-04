@@ -83,3 +83,6 @@ RUN echo 'export PS1="\[$(tput bold)\]\[$(tput setaf 4)\][\[$(tput setaf 5)\]\u\
 RUN mkdir /var/run/sshd
 EXPOSE 22
 ADD id_rsa.pub /id_rsa.pub
+
+# Install Mako python templating library
+RUN pip install mako
