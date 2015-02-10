@@ -34,3 +34,4 @@ Various useful sources for understanding docker:
 TODO: 
 * Use my virtual-machined Windows installation to figure out basic Windows instructions.
 * Build stable-lib in the mac build process.
+* An update script that will grab any new commits and rebuild and such.
