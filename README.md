@@ -12,7 +12,7 @@ Installing on Mac is slightly more involved because Docker does not run natively
 1. Install virtualbox. Go to the [virtual box website](http://virtualbox.org/).
 2. Install boot2docker. Go to the [Docker website](https://docs.docker.com/installation/mac/) and follow the directions there.
 3. If you want to be able to use GUI tools (matplotlib, etc) within the docker container, install XQuartz.
-4. Follow steps 1 and 2 from the Ubuntu section.
+4. Follow steps 2 and 3 from the Ubuntu section.
 
 ## Usage ##
 1. Start a docker container `./config/start` The config/start script should open a docker container with the current folder included in the container. 
