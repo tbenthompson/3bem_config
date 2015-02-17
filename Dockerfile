@@ -84,5 +84,8 @@ RUN mkdir /var/run/sshd
 EXPOSE 22
 ADD id_rsa.pub /id_rsa.pub
 
+# TODO: Move these up to the apt-get lines
 # Install Mako python templating library
 RUN pip install mako
+# Install Valgrind
+RUN apt-get install -y valgrind
